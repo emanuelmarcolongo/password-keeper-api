@@ -15,5 +15,18 @@ model User {
   name String
   email String @unique
   password String
+  Credential Credential[]
 }
 
+
+model Credential {
+  id       Int    @id @default(autoincrement())
+  title    String
+  url      String
+  username String
+  password String
+  User     User   @relation(fields: [userId], references: [id])
+  userId   Int
+
+  @@unique([title, userId])
+}
