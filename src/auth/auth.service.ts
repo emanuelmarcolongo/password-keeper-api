@@ -25,7 +25,7 @@ export class AuthService {
     const correctPassword = bcrypt.compareSync(password, user.password);
     if (!correctPassword) throw new UnauthorizedException('Email ou senha incorretos');
 
-    const payload = { email: user.email, sub: user.id };
+    const payload = { email: user.email, id: user.id };
     return {
       access_token: await this.jwtService.signAsync(payload),
     };

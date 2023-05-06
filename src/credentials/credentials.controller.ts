@@ -12,9 +12,9 @@ export class CredentialsController {
 
   @Post()
   async create(
-    @LoggedUser() user: { email: string; sub: number },
+    @LoggedUser() user: User,
     @Body() credentialDTO: CreateCredentialDTO,
   ) {
-    return this.credentialsService.create(user.sub, credentialDTO);
+    return this.credentialsService.create(user.id, credentialDTO);
   }
 }
