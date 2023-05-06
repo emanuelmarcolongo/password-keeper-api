@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { CredentialsService } from './credentials.service';
 import { LoggedUser } from 'src/decorators/user.decorator';
@@ -17,4 +17,10 @@ export class CredentialsController {
   ) {
     return this.credentialsService.create(user.id, credentialDTO);
   }
+
+  @Get() 
+  async getAll(@LoggedUser() user: User) {
+    return this.credentialsService.getAll(user.id)
+  }
+
 }

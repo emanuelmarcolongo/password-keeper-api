@@ -27,4 +27,15 @@ export class CredentialsService {
       password: this.cryptr.encrypt(credentialDTO.password),
     });
   }
+
+  async getAll(userId: number) {
+    const userCredentials = await this.credentialRepository.getAll(userId);
+
+    return userCredentials.map(credential => {
+      return {
+        ...credential,
+        password: this.cryptr.decrypt(credential.password)
+      }
+    })
+  }
 }

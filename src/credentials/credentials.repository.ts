@@ -23,4 +23,12 @@ export class CredentialRepository {
       },
     });
   }
+
+  async getAll(userId: number) {
+    return await this.prisma.credential.findMany({
+      where: {
+        userId
+      }
+    })
+  }
 }
