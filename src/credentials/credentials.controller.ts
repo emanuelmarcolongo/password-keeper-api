@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { CredentialsService } from './credentials.service';
 import { LoggedUser } from 'src/decorators/user.decorator';
@@ -23,4 +23,8 @@ export class CredentialsController {
     return this.credentialsService.getAll(user.id)
   }
 
+  @Delete(":id")
+  async delete(@LoggedUser() user: User, @Param("id", ParseIntPipe) id: number) {
+    return await this.credentialsService.delete(user.id, id);
+  }
 }

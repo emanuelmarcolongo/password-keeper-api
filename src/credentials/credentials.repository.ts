@@ -27,8 +27,25 @@ export class CredentialRepository {
   async getAll(userId: number) {
     return await this.prisma.credential.findMany({
       where: {
-        userId
-      }
-    })
+        userId,
+      },
+    });
+  }
+
+  async getById(userId: number, id: number) {
+    return await this.prisma.credential.findFirst({
+      where: {
+        userId,
+        id,
+      },
+    });
+  }
+
+  async delete(id: number) {
+    return await this.prisma.credential.delete({
+      where: {
+        id
+      },
+    });
   }
 }

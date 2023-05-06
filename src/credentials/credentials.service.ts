@@ -38,4 +38,11 @@ export class CredentialsService {
       }
     })
   }
+
+  async delete(userId: number, id: number) {
+    const credential = await this.credentialRepository.getById(userId, id);
+    if (!credential) throw new NotFoundException();
+
+    return this.credentialRepository.delete(id);
+  }
 }
